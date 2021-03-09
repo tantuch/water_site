@@ -37,6 +37,11 @@ MANIFEST
 pip-log.txt
 pip-delete-this-directory.txt
 
+# Images
+*.jpg
+*.jpeg
+*.png
+
 # Unit test / coverage reports
 htmlcov/
 .tox/
@@ -60,6 +65,8 @@ coverage.xml
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+*.db
+secret.py
 
 # Flask stuff:
 instance/
