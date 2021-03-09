@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ru">
+	{% load static %}
+	{% static "" as baseUrl %}
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Water site</title>
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<link rel="shortcut icon" type="image/png" href="{% static "water/favicon.png" %}"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<script src="{% static "water/water.js" %}"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+							$("a[href='#products']").click(function(){
+											onProducts();
+										});
+						});
+			$(document).ready(function(){
+							$("a.nav-link[href='#']").click(function(){
+											onMain();
+										});
+						});
+		</script>
+		<link rel="stylesheet" href="../static/water/style.css">
+	</head>
+	<body>
+		<!--<nav class="navbar navbar-inverse navbar-fixed-top">-->
+		<nav class="navbar navbar-expand-md fixed-top navbar-light bg-light">
+			<div class="container-fluid" id="navbar-head">
+				<a class="navbar-brand" href="#"><img src="{% static "water/logo3.png" %}"></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item active">
+							<div>
+								<a href="#" class="nav-link">Главная</a>
+							</div>
+						</li>
+						<li class="nav-item">
+							<div>
+								{% for info in contacts %}
+								<div class="col-md-12"> {{ info.telephones }}</div>
+								<div class="col-md-12"> {{ info.email }}</div>
+								{% endfor %}	
+							</div>
+						</li>
+						<li class="nav-item">
+							<a href="#carousel" class="nav-link">Компания</a>
+						</li>
+
+						<li class="nav-item">
+							<a href="#products" class="nav-link">Продукция</a>
+						</li>
+						<li class="nav-item">
+							<a href="#certificate" class="nav-link">Сертификат</a>
+						</li>
+						<li class="nav-item">
+							<a href="#contacts" class="nav-link">Контакты</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		{% for products in groups_products %}
+		<div class="container" id="products">
+			<div class="row">
+				{% for product in products %}
+				<div class="col-sm-4">
+					<div class="card card-primary">
+						<div class="card-img-top"><img src="{{ baseUrl }}water/{{ product.img_url }}" style="width:100%" class="img-responsive" alt="Image"></div>
+						<div class="card-body">
+								<div class="col-md-12" align="center"> {{ product.price }}</div>
+								<div class="col-md-12" align="center"> {{ product.name }}</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		{% endfor %}
+
+		<div class="container-fluid" id="carousel">
+			<p>Carousel</p>
+		</div>
+		<div class="container-fluid" id="certificate">
+			<p>Certificate</p>
+		</div>
+		<div class="container-fluid" id="contacts">
+			<p>Contacts</p>
+		</div>
+		<footer class="container-fluid text-center" id="ending">
+			<p>Happy ending</p>
+		</footer>
+	</body>
+</html>
+
