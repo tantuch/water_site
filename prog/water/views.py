@@ -1,4 +1,7 @@
 #from django.shortcuts import render
+import os
+
+from django.conf import settings
 from django.http import HttpResponse
 from django.template import loader
 
@@ -9,16 +12,23 @@ from .models import Sertify
 
 
 def website(request):
-    company = Company.objects.all()
+
+    # Imgs for carousel
+    carousel = [img for img in os.listdir(settings.CAROUSEL_IMG)]
+
+    company = Company.objects.filter(id=1).values_list("content", flat=True)
     contacts = Contacts.objects.all()
-    # Groups by N-product
+
+    # Groups by N-products
     N = 3
     products = Products.objects.all()
     groups_products = [products[k:k+N] for k in range(0, len(products), N)]
+
     sertify = Sertify.objects.all()
 
     template = loader.get_template('index.html')
     context = {
+        'carousel': carousel,
         'company': company,
         'contacts': contacts,
         'groups_products': groups_products,
