@@ -16,7 +16,7 @@ def website(request):
     # Imgs for carousel
     carousel = [img for img in os.listdir(settings.CAROUSEL_IMG)]
 
-    company = Company.objects.filter(id=1).values_list("content", flat=True)
+    company = Company.objects.values_list("content", flat=True)
     contacts = Contacts.objects.all()
 
     # Groups by N-products
@@ -24,7 +24,7 @@ def website(request):
     products = Products.objects.all()
     groups_products = [products[k:k+N] for k in range(0, len(products), N)]
 
-    sertify = Sertify.objects.all()
+    sertify = Sertify.objects.values("img_url", "content").first()
 
     template = loader.get_template('index.html')
     context = {
